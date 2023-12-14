@@ -45,6 +45,11 @@ public class StudentController {
         this.service.apagar(id);
     }
 
+    @GetMapping("/byemail")
+    public List<Student> getstudentbyemail(@RequestParam String email){
+      return  this.service.getstudentbyemail(email);
+    }
+
     private static String[] getNullPropertyNames(Object source) {
         final BeanWrapper src = new BeanWrapperImpl(source);
         java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();

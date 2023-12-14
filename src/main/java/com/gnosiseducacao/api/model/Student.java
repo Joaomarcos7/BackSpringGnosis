@@ -10,6 +10,8 @@ import java.util.List;
 @Table(name="tb_student")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 
 public class Student {
     @Id

@@ -32,6 +32,10 @@ public class StudentService {
         this.repository.deleteById(id);
     }
 
+    public List<Student> getstudentbyemail(String email){
+        return this.repository.findStudentsByEmail(email);
+    }
+
 
 
 }
