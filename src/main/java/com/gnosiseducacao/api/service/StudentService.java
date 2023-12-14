@@ -17,16 +17,14 @@ public class StudentService {
         return this.repository.findAll();
     }
 
-    public Student getstudentbyid(long id){
+
+    public Student getstudentbyid(Long id){
         return this.repository.findById(id).orElse(null);
     }
 
     @Transactional
     public Student inserirouatualizar(Student student){
         Student aluno= this.repository.save(student);
-        if(Integer.parseInt(aluno.getidade())<18){
-            throw new RuntimeException("Idade não permitida!");
-        }
         return aluno;
     }
 

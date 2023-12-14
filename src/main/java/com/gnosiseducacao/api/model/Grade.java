@@ -1,19 +1,25 @@
 package com.gnosiseducacao.api.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Table(name = "tb_grade")
 public class Grade {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id ;
     private double valor;
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE},
-            fetch=FetchType.LAZY)
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
+    @JoinColumn(name = "gradestudent_id")
     private Student student;
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE},
-            fetch=FetchType.LAZY)
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
+    @JoinColumn(name = "gradesubject_id")
     private Subject subject;
 
     public long getid(){

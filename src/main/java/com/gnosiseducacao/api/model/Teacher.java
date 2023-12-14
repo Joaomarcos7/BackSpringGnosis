@@ -1,15 +1,21 @@
 package com.gnosiseducacao.api.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.ArrayList;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Table(name = "tb_teacher")
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private  long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private  Long id;
     private String nome;
     private String email;
     private String password;
@@ -20,16 +26,17 @@ public class Teacher {
     private String endereco;
 
     private String telefone;
-    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
+    @OneToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
+    @JoinColumn(name = "teachersubject_id")
     private Subject subject;
 
 
 
-    public long getid(){
+    public long getId(){
         return this.id;
     }
 
-    public void setid(long id){
+    public void setId(long id){
         this.id=id;
     }
 
