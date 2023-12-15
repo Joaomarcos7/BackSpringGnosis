@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,6 +30,8 @@ public class Teacher {
     @OneToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
     @JoinColumn(name = "teachersubject_id")
     private Subject subject;
+    @OneToMany(mappedBy = "teacher",cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
+    private List<Aviso> avisos;
 
 
 
