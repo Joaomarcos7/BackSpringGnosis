@@ -1,5 +1,4 @@
 package com.gnosiseducacao.api.controller;
-import com.gnosiseducacao.api.model.Student;
 import com.gnosiseducacao.api.model.Teacher;
 import com.gnosiseducacao.api.service.TeacherService;
 import org.springframework.beans.BeanUtils;
