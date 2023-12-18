@@ -1,6 +1,7 @@
 package com.gnosiseducacao.api.controller;
 
 import com.gnosiseducacao.api.model.Subject;
+import com.gnosiseducacao.api.model.SubjectDTO;
 import com.gnosiseducacao.api.service.SubjectService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -19,19 +20,19 @@ public class SubjectController {
     private SubjectService service;
 
     @GetMapping
-    public List<Subject> getsubjects(){
+    public List<SubjectDTO> getsubjects(){
         return this.service.getsubjects();
     }
 
     @GetMapping("/{id}")
-    public Subject getsubjectbyid(@PathVariable("id") Long id ){
-        return this.service.getsubjectbyid(id);
+    public SubjectDTO getsubjectbyid(@PathVariable("id") Long id ){
+        return this.service.getsubjectDTObyid(id);
     }
 
 
     @PostMapping
-    public Subject inserir(@RequestBody Subject subject){
-        return this.service.inserirouatualizar(subject);
+    public SubjectDTO inserir(@RequestBody Subject subject){
+        return new SubjectDTO(this.service.inserirouatualizar(subject));
     }
 
     @DeleteMapping("/{id}")
@@ -41,10 +42,10 @@ public class SubjectController {
 
 
     @PutMapping("/{id}")
-    public Subject edit(@PathVariable("id") Long id,@RequestBody Subject subject){
+    public SubjectDTO edit(@PathVariable("id") Long id,@RequestBody Subject subject){
         Subject materia= this.service.getsubjectbyid(id);
         BeanUtils.copyProperties(subject, materia, getNullPropertyNames(subject));
-        return this.service.inserirouatualizar(materia);
+        return new SubjectDTO(this.service.inserirouatualizar(materia));
     }
 
 

@@ -28,5 +28,9 @@ public class GradeService {
         return this.repository.save(grade);
     }
 
+    public List<Grade> getgradesfromstudent(Long id){
+        return this.repository.gradesfromstudent(id);
+    }
+
 
 }

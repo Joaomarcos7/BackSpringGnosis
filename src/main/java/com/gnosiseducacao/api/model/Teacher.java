@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -47,66 +48,11 @@ public class Teacher {
         return this.nome;
     }
 
-    public void setnome(String nome){
-        this.nome=nome;
+    public List<String> getonlyname(List<Student> students){
+        List<String> names= Collections.emptyList();
+        for(Student student : students){
+            names.add(student.getNome());
+        }
+        return names;
     }
-
-    public String getinstituicao(){
-        return this.instituicao;
-    }
-
-    public void setInstituicao(String instituicao){
-        this.instituicao=instituicao;
-    }
-
-    public String gettelefone(){
-        return this.telefone;
-    }
-
-    public void settelefone(String telefone){
-        this.telefone=telefone;
-    }
-
-    public String getendereco(){
-        return this.endereco;
-    }
-
-    public void setendereco(String endereco){
-        this.endereco=endereco;
-    }
-
-
-    public String getemail(){
-        return this.email;
-    }
-
-    public void setemail(String email){
-        this.email=email;
-    }
-
-
-    public String getpassword(){
-        return this.password;
-    }
-
-    public void setpassword(String password){
-        this.password=password;
-    }
-
-    public String getidade(){
-        return this.idade;
-    }
-
-    public void setidade(String idade){
-        this.idade=idade;
-    }
-
-    public Subject getsubject(){
-        return this.subject;
-    }
-
-    public void setsubject(Subject subject){
-        this.subject=subject;
-    }
-
 }

@@ -3,8 +3,7 @@ package com.gnosiseducacao.api.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name="tb_student")
@@ -27,8 +26,7 @@ public class Student {
     private String idade;
     @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
     @JoinTable(
-            name = "student_subject",
-            joinColumns = @JoinColumn(name = "student_id")
+            name = "student_subject"
     )
     private List<Subject> subjects;
     @OneToMany(mappedBy = "student",cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
@@ -46,63 +44,33 @@ public class Student {
         return this.nome;
     }
 
-    public void setNome(String nome){
-        this.nome=nome;
+    public void addSubject(Subject subject){
+        this.getSubjects().add(subject);
+        subject.getStudents().add(this);
     }
 
+    public List<String> getonlyname(List<Subject> subjects){
 
-    public String getTelefone(){
-        return this.telefone;
+       ArrayList<String> names = new ArrayList<>();
+        if(!subjects.isEmpty()) {
+            for (Subject subject : subjects) {
+                names.add(subject.getName());
+            }
+            return names;
+        }
+        return names;
     }
 
-    public void setTelefone(String telefone){
-        this.telefone=telefone;
+    public List<String> getonlyvalues(List<Grade> grades){
+        ArrayList<String> names =new ArrayList<>();
+        if(!grades.isEmpty()) {
+            for (Grade grade: grades) {
+                names.add(Double.toString(grade.getvalor()));
+            }
+            return names;
+        }
+        return names;
     }
 
-    public String getEndereco(){
-        return this.endereco;
-    }
-
-    public void setEndereco(String endereco){
-        this.endereco=endereco;
-    }
-
-
-    public String getEmail(){
-        return this.email;
-    }
-
-    public void setEmail(String email){
-        this.email=email;
-    }
-
-
-    public String getPassword(){
-        return this.password;
-    }
-
-    public void setPassword(String password){
-        this.password=password;
-    }
-
-    public String getInstituicao(){
-        return this.instituicao;
-    }
-
-    public void setInstituicao(String instituicao){
-        this.instituicao=instituicao;
-    }
-
-    public String getIdade(){
-        return this.idade;
-    }
-
-    public void setIdade(String idade){
-        this.idade=idade;
-    }
-
-    public List<Grade> getGrades(){return this.grades;}
-
-    public void setGrades(List<Grade> grades){this.grades=grades;}
 
 }

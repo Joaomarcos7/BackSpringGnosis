@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @RestController
@@ -58,6 +59,11 @@ public class GradeController {
     @DeleteMapping("/{id}")
     public void deletegrade(@PathVariable("id") Long id) {
         this.service.apagargrade(id);
+    }
+
+    @GetMapping("/student/{id}")
+    public List<Grade> getgradefromstudent(@PathVariable("id") Long id){
+        return this.service.getgradesfromstudent(id);
     }
 
 

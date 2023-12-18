@@ -1,6 +1,7 @@
 package com.gnosiseducacao.api.controller;
 
 import com.gnosiseducacao.api.model.Student;
+import com.gnosiseducacao.api.model.StudentDTO;
 import com.gnosiseducacao.api.service.StudentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -19,22 +20,22 @@ public class StudentController {
     private StudentService service;
 
     @GetMapping
-    public List<Student> getStudents(){
+    public List<StudentDTO> getStudents(){
         return this.service.getstudents();
     }
 
     @GetMapping("/{id}")
-    public Student getstudentbyid(@PathVariable("id") Long id){
-        return this.service.getstudentbyid(id);
+    public StudentDTO getstudentbyid(@PathVariable("id") Long id){
+        return this.service.getstudentDTObyid(id);
     }
 
     @PostMapping
-    public Student inserirstudent(@RequestBody Student student){
+    public StudentDTO inserirstudent(@RequestBody Student student){
         return this.service.inserirouatualizar(student);
     }
 
     @PutMapping("/{id}")
-    public Student atualizarstudent(@PathVariable("id") Long id ,@RequestBody Student student){
+    public StudentDTO atualizarstudent(@PathVariable("id") Long id ,@RequestBody Student student){
         Student aluno = this.service.getstudentbyid(id);
         BeanUtils.copyProperties(student, aluno, getNullPropertyNames(student));
         return this.service.inserirouatualizar(aluno);
@@ -46,8 +47,16 @@ public class StudentController {
     }
 
     @GetMapping("/byemail")
-    public List<Student> getstudentbyemail(@RequestParam String email){
+    public List<StudentDTO> getstudentbyemail(@RequestParam String email){
       return  this.service.getstudentbyemail(email);
+    }
+
+
+    @PutMapping("/addsubject")
+    public void addsubjectinstudent(@RequestParam("idstudent") Long idstudent, @RequestParam("idsubject") Long idsubject){
+
+        this.service.adicionarDisciplinaParaAluno(idstudent,idsubject);
+
     }
 
     private static String[] getNullPropertyNames(Object source) {
@@ -63,5 +72,6 @@ public class StudentController {
         String[] result = new String[emptyNames.size()];
         return emptyNames.toArray(result);
     }
+
 
 }

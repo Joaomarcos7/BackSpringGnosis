@@ -1,5 +1,6 @@
 package com.gnosiseducacao.api.controller;
 import com.gnosiseducacao.api.model.Teacher;
+import com.gnosiseducacao.api.model.TeacherDTO;
 import com.gnosiseducacao.api.service.TeacherService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -19,18 +20,18 @@ public class TeacherController {
     private TeacherService servico;
 
     @GetMapping
-    public List<Teacher> getTeachers(){
+    public List<TeacherDTO> getTeachers(){
         return this.servico.getTeachers();
     }
 
     @GetMapping("/{id}")
-    public Teacher getstudentbyid(@PathVariable("id") Long id){
-        return this.servico.getTeacherbyid(id);
+    public TeacherDTO getstudentbyid(@PathVariable("id") Long id){
+        return this.servico.getTeacherDTObyid(id);
     }
 
    @PostMapping
-   public Teacher inserirouatualizar(@RequestBody Teacher teacher){
-        return this.servico.inserirouatualizar(teacher);
+   public TeacherDTO inserirouatualizar(@RequestBody Teacher teacher){
+        return new TeacherDTO( this.servico.inserirouatualizar(teacher));
    }
 
    @DeleteMapping("/{id}")
@@ -39,14 +40,14 @@ public class TeacherController {
    }
 
    @PutMapping("/{id}")
-    public Teacher editteacher(@PathVariable("id") Long id,@RequestBody Teacher teacher){
+    public TeacherDTO editteacher(@PathVariable("id") Long id,@RequestBody Teacher teacher){
        Teacher professor = this.servico.getTeacherbyid(id);
        BeanUtils.copyProperties(teacher, professor, getNullPropertyNames(teacher));
-       return this.servico.inserirouatualizar(professor);
+       return new TeacherDTO(this.servico.inserirouatualizar(professor));
    }
 
    @GetMapping("/byemail")
-   public List<Teacher> getbyemail(@RequestParam("email") String email){
+   public List<TeacherDTO> getbyemail(@RequestParam("email") String email){
         return this.servico.findbyemail(email);
    }
     private static String[] getNullPropertyNames(Object source) {
