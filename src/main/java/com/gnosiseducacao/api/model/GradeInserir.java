@@ -8,6 +8,6 @@ import lombok.Setter;
 public class GradeInserir {
 
     private double valor;
-    private Long studentid;
-    private Long subjectid;
+    private Long student;
+    private Long subject;
 }

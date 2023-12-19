@@ -42,8 +42,8 @@ public class GradeController {
     public GradeDTO inserirgrade(@RequestBody GradeInserir notainserir) {
         Grade grade= new Grade();
         grade.setvalor(notainserir.getValor());
-        grade.setsubject(this.subjectservice.getsubjectbyid(notainserir.getSubjectid()));
-        grade.setStudent(this.studentService.getstudentbyid(notainserir.getStudentid()));
+        grade.setsubject(this.subjectservice.getsubjectbyid(notainserir.getSubject()));
+        grade.setStudent(this.studentService.getstudentbyid(notainserir.getStudent()));
         return this.service.inserirouatualizar(grade);
     }
 
