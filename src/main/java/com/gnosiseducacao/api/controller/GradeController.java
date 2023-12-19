@@ -1,7 +1,11 @@
 package com.gnosiseducacao.api.controller;
 
 import com.gnosiseducacao.api.model.Grade;
+import com.gnosiseducacao.api.model.GradeDTO;
+import com.gnosiseducacao.api.model.GradeInserir;
 import com.gnosiseducacao.api.service.GradeService;
+import com.gnosiseducacao.api.service.StudentService;
+import com.gnosiseducacao.api.service.SubjectService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -19,25 +23,33 @@ public class GradeController {
 
     @Autowired
     private GradeService service;
+    @Autowired
+    private SubjectService subjectservice;
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping
-    public List<Grade> getallgrades() {
+    public List<GradeDTO> getallgrades() {
         return this.service.getallgrades();
     }
 
     @GetMapping("/{id}")
-    public Grade getgradebyid(@RequestParam("id") Long id) {
-        return this.service.getgradebyid(id);
+    public GradeDTO getgradebyid(@RequestParam("id") Long id) {
+        return this.service.getgradeDTObyid(id);
     }
 
     @PostMapping
-    public Grade inserirgrade(@RequestBody Grade grade) {
+    public GradeDTO inserirgrade(@RequestBody GradeInserir notainserir) {
+        Grade grade= new Grade();
+        grade.setvalor(notainserir.getValor());
+        grade.setsubject(this.subjectservice.getsubjectbyid(notainserir.getSubjectid()));
+        grade.setStudent(this.studentService.getstudentbyid(notainserir.getStudentid()));
         return this.service.inserirouatualizar(grade);
     }
 
 
     @PutMapping("/{id}")
-    public Grade atualizargrade(@PathVariable("id") Long id, @RequestBody Grade grade) {
+    public GradeDTO atualizargrade(@PathVariable("id") Long id, @RequestBody Grade grade) {
         Grade nota = this.service.getgradebyid(id);
         BeanUtils.copyProperties(grade, nota, getNullPropertyNames(grade));
         return this.service.inserirouatualizar(nota);
@@ -62,8 +74,13 @@ public class GradeController {
     }
 
     @GetMapping("/student/{id}")
-    public List<Grade> getgradefromstudent(@PathVariable("id") Long id){
+    public List<GradeDTO> getgradefromstudent(@PathVariable("id") Long id){
         return this.service.getgradesfromstudent(id);
+    }
+
+    @GetMapping("/getbysubject/{id}")
+    public List<GradeDTO> getgradebysubject(@PathVariable("id") Long id){
+        return this.service.getgradesbysubject(id);
     }
 
 

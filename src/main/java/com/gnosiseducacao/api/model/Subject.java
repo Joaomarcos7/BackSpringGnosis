@@ -25,16 +25,16 @@ public class Subject {
     @OneToMany(mappedBy = "subject",cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
     private List<Grade> grades;
 
-    public List<String> getonlyname(List<Student> students){
+    public List<Long> getonlyid(List<Student> students){
 
-            ArrayList<String> names = new ArrayList<>();
+            ArrayList<Long> ids = new ArrayList<>();
             if(!students.isEmpty()) {
                 for (Student student : students) {
-                    names.add(student.getNome());
+                    ids.add(student.getId());
                 }
-                return names;
+                return ids;
             }
-            return names;
+            return ids;
     }
 
     public void addstudent(Student student){

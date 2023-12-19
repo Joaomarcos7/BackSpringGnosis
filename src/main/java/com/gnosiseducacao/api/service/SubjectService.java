@@ -3,6 +3,7 @@ package com.gnosiseducacao.api.service;
 import com.gnosiseducacao.api.model.Subject;
 import com.gnosiseducacao.api.model.SubjectDTO;
 import com.gnosiseducacao.api.repositories.SubjectRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class SubjectService {
     public SubjectDTO getsubjectDTObyid(Long id){
         return new SubjectDTO(this.repository.findById(id).orElse(null));
     }
-
+@Transactional
     public Subject inserirouatualizar(Subject subject){
         return this.repository.save(subject);
     }

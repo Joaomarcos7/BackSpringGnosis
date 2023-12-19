@@ -51,7 +51,9 @@ public class Grade {
     }
 
     public void setStudent(Student student){
+
         this.student=student;
+        student.adicionarnota(this);
     }
 
 }

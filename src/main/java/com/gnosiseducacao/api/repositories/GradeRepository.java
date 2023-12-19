@@ -11,4 +11,7 @@ public interface GradeRepository extends JpaRepository<Grade,Long> {
 @Query("Select g FROM Grade g where g.student.id=:id")
     public List<Grade> gradesfromstudent(@Param("id") Long id);
 
+@Query("Select g from Grade g where g.subject.id=:id")
+    public List<Grade> gradesfromsubject(@Param("id") Long id);
+
 }

@@ -49,28 +49,31 @@ public class Student {
         subject.getStudents().add(this);
     }
 
-    public List<String> getonlyname(List<Subject> subjects){
+    public List<Long> getonlyname(List<Subject> subjects){
 
-       ArrayList<String> names = new ArrayList<>();
+       ArrayList<Long> names = new ArrayList<>();
         if(!subjects.isEmpty()) {
             for (Subject subject : subjects) {
-                names.add(subject.getName());
+                names.add(subject.getId());
             }
             return names;
         }
         return names;
     }
 
-    public List<String> getonlyvalues(List<Grade> grades){
-        ArrayList<String> names =new ArrayList<>();
+    public List<Long> getonlyvalues(List<Grade> grades){
+        ArrayList<Long> names =new ArrayList<>();
         if(!grades.isEmpty()) {
             for (Grade grade: grades) {
-                names.add(Double.toString(grade.getvalor()));
+                names.add(grade.getid());
             }
             return names;
         }
         return names;
     }
 
+    public void adicionarnota(Grade grade){
+        this.getGrades().add(grade);
+    }
 
 }
