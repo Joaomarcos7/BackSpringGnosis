@@ -1,5 +1,6 @@
 package com.gnosiseducacao.api.service;
 
+import com.gnosiseducacao.api.model.IdadeInvalidaException;
 import com.gnosiseducacao.api.model.Student;
 import com.gnosiseducacao.api.model.StudentDTO;
 import com.gnosiseducacao.api.model.Subject;
@@ -34,6 +35,12 @@ public class StudentService {
 
     @Transactional
     public StudentDTO inserirouatualizar(Student student){
+        if(student.getIdade()!=null) {
+            if (Integer.parseInt(student.getIdade()) < 18) {
+                throw new IdadeInvalidaException("Aluno não pode ser menor de 18 anos");
+            }
+        }
+
         Student aluno= this.studentrepository.save(student);
         return new StudentDTO(aluno);
     }
@@ -50,6 +57,7 @@ public class StudentService {
     public void adicionarDisciplinaParaAluno(Long studentId, Long subjectId) {
         Student aluno = studentrepository.findById(studentId).orElseThrow(() -> new EntityNotFoundException("Aluno não encontrado"));
         Subject disciplina = subjectrepository.findById(subjectId).orElseThrow(() -> new EntityNotFoundException("Disciplina não encontrada"));
+
 
         aluno.addSubject(disciplina);
 

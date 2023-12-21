@@ -34,7 +34,7 @@ public class GradeController {
     }
 
     @GetMapping("/{id}")
-    public GradeDTO getgradebyid(@RequestParam("id") Long id) {
+    public GradeDTO getgradebyid(@PathVariable("id") Long id) {
         return this.service.getgradeDTObyid(id);
     }
 

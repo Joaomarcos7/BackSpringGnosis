@@ -33,4 +33,8 @@ public class SubjectService {
         this.repository.deleteById(id);
     }
 
+    public List<SubjectDTO> getsubjectbystudent(Long id){
+        return this.repository.getsubjectsbystudent(id).stream().map(SubjectDTO::new).toList();
+    }
+
 }

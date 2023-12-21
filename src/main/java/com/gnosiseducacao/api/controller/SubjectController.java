@@ -48,6 +48,11 @@ public class SubjectController {
         return new SubjectDTO(this.service.inserirouatualizar(materia));
     }
 
+    @GetMapping("/student/{id}")
+    public List<SubjectDTO> getsubjectbystudent(@PathVariable("id") Long id){
+        return this.service.getsubjectbystudent(id);
+    }
+
 
     private static String[] getNullPropertyNames(Object source) {
         final BeanWrapper src = new BeanWrapperImpl(source);
