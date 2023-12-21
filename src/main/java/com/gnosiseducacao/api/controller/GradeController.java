@@ -49,9 +49,11 @@ public class GradeController {
 
 
     @PutMapping("/{id}")
-    public GradeDTO atualizargrade(@PathVariable("id") Long id, @RequestBody Grade grade) {
+    public GradeDTO atualizargrade(@PathVariable("id") Long id, @RequestBody GradeInserir grade) {
         Grade nota = this.service.getgradebyid(id);
-        BeanUtils.copyProperties(grade, nota, getNullPropertyNames(grade));
+        nota.setStudent(this.studentService.getstudentbyid(grade.getStudent()));
+        nota.setsubject(this.subjectservice.getsubjectbyid(grade.getSubject()));
+        nota.setvalor(grade.getValor());
         return this.service.inserirouatualizar(nota);
     }
 
