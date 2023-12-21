@@ -57,6 +57,10 @@ public class StudentService {
         subjectrepository.save(disciplina);
     }
 
+public List<StudentDTO> getstudentsbysubject(Long id) {
+    return this.studentrepository.findstudentsbysubject(id).stream().map(StudentDTO::new).toList();
+}
+
 
 
 

@@ -59,6 +59,16 @@ public class StudentController {
 
     }
 
+
+    @GetMapping("/studentsbysubject/{id}")
+    public List<StudentDTO> getstudentsbysubject(@PathVariable Long id ){
+        return this.service.getstudentsbysubject(id);
+    }
+
+
+
+
+
     private static String[] getNullPropertyNames(Object source) {
         final BeanWrapper src = new BeanWrapperImpl(source);
         java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();

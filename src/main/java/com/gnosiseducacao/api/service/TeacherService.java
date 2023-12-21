@@ -41,4 +41,8 @@ public class TeacherService {
         return this.repository.getsteacherbyemail(email).stream().map(TeacherDTO::new).toList();
     }
 
+    public List<TeacherDTO> findbysubjects(List<Long> ids){
+        return this.repository.getteachersbysubjects(ids).stream().map(TeacherDTO::new).toList();
+    }
+
 }

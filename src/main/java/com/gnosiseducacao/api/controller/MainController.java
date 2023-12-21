@@ -13,6 +13,6 @@ public class MainController {
 
     @GetMapping
     public String mainpage(){
-        return "Seja bem vindo a nossa API GNosis";
+        return "Seja bem vindo a nossa API Gnosis";
     }
 }

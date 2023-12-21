@@ -19,7 +19,7 @@ public class Aviso {
 
     private String header;
 
-    private LocalDateTime hora;
+    private String hora;
 
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
     @JoinColumn(name = "avisoteacher_id")

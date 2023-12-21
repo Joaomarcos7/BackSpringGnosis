@@ -64,4 +64,9 @@ public class TeacherController {
         return emptyNames.toArray(result);
     }
 
+    @GetMapping("/subjects")
+    public List<TeacherDTO> getbysubjects(@RequestParam(value = "ids" , required = false) List<Long> ids){
+        return this.servico.findbysubjects(ids);
+    }
+
 }

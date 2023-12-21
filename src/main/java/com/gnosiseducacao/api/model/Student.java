@@ -52,13 +52,10 @@ public class Student {
     public List<Long> getonlyname(List<Subject> subjects){
 
        ArrayList<Long> names = new ArrayList<>();
-        if(!subjects.isEmpty()) {
             for (Subject subject : subjects) {
                 names.add(subject.getId());
             }
             return names;
-        }
-        return names;
     }
 
     public List<Long> getonlyvalues(List<Grade> grades){
